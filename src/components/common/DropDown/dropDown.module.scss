@@ -43,11 +43,11 @@
       color: colors.$GRAY_012;
       text-align: center;
       cursor: pointer;
-      border-radius: 4px;
 
       > button {
         width: inherit;
         padding: 6px;
+        border-radius: 4px;
       }
 
       &:hover {
