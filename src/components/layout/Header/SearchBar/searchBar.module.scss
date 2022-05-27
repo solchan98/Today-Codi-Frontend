@@ -1,0 +1,35 @@
+@use '/src/styles/constants/colors';
+
+.searchBarWrapper {
+  position: relative;
+  box-sizing: border-box;
+  width: 260px;
+  min-width: 120px;
+  height: 40px;
+  padding: 0 24px;
+  line-height: 40px;
+  border: 1px solid colors.$BORDER_LINE;
+  border-radius: 4px;
+
+  > form {
+    > input {
+      width: 100%;
+      font-size: 14px;
+      vertical-align: middle;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .svg {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}

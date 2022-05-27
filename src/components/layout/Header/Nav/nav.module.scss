@@ -1,0 +1,23 @@
+@use '/src/styles/constants/colors';
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 140px;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 700;
+
+  > a {
+    text-decoration: none;
+  }
+
+  .navLinkOn {
+    color: colors.$THEME;
+  }
+
+  .navLinkOff {
+    color: colors.$GRAY_01;
+  }
+}
