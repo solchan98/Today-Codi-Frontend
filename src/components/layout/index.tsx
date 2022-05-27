@@ -6,9 +6,12 @@ import Header from './Header';
 const Layout = () => {
   return (
     <div className={cs.layoutWrapper}>
-      <Header />
-      LayOut
-      <Outlet />
+      <div className={cs.headerWrapper}>
+        <Header />
+      </div>
+      <div className={cs.bodyWrapper}>
+        <Outlet />
+      </div>
     </div>
   );
 };

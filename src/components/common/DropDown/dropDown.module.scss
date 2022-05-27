@@ -1,0 +1,62 @@
+@use '/src/styles/constants/colors';
+
+.dropDownWrapper {
+  z-index: 1;
+
+  .dropDownBtn {
+    padding: 7px 8px 6px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 19px;
+    color: colors.$GRAY_012;
+    background-color: colors.$GRAY_00;
+    border-radius: 4px;
+
+    &::after {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin: 0 0 4px 7px;
+      content: '';
+      border-top: 1px solid colors.$GRAY_012;
+      border-right: 1px solid colors.$GRAY_012;
+      transform: rotate(135deg);
+    }
+  }
+
+  .dropDownList {
+    display: none;
+  }
+
+  .dropDownListOn {
+    display: block;
+    width: 120px;
+    margin: 4px 0 0;
+    background-color: colors.$WHITE;
+    border-radius: 4px;
+    box-shadow: -1px -1px 3px colors.$GRAY_01;
+
+    > li {
+      width: 120px;
+      height: 24px;
+      font-size: 14px;
+      color: colors.$GRAY_012;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 4px;
+
+      > button {
+        width: inherit;
+        padding: 6px;
+      }
+
+      &:hover {
+        background-color: colors.$GRAY_00;
+      }
+
+      .selectedVal {
+        background-color: colors.$GRAY_00;
+      }
+    }
+  }
+}
