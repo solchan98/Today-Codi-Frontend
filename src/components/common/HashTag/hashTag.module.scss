@@ -1,0 +1,12 @@
+@use '/src/styles/constants/colors';
+
+.hashTag {
+  margin: 2px 12px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: colors.$GRAY_02;
+
+  &:hover {
+    color: colors.$THEME;
+  }
+}

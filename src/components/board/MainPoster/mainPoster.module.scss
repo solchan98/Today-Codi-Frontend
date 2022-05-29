@@ -1,9 +1,12 @@
 .mainPosterWrapper {
   position: relative;
-  width: 100%;
+  width: 620px;
+  height: 840px;
   text-align: center;
 
   > img {
-    max-width: 100%;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
   }
 }
