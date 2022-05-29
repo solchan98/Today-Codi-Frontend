@@ -9,8 +9,10 @@ const App = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<Trend />} />
-        <Route path='board' element={<Board />} />
+        <Route path='trend'>
+          <Route index element={<Trend />} />
+          <Route path=':id' element={<Board />} />
+        </Route>
         <Route path='following' element={<div>Following</div>} />
       </Route>
       <Route path='login' element={<div>Login</div>} />

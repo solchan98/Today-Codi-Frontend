@@ -4,7 +4,7 @@ import cs from './nav.module.scss';
 const Nav = () => {
   return (
     <nav className={cs.nav}>
-      <NavLink to='/' className={(prop) => (prop.isActive ? cs.navLinkOn : cs.navLinkOff)}>
+      <NavLink to='/trend' className={(prop) => (prop.isActive ? cs.navLinkOn : cs.navLinkOff)}>
         트렌드
       </NavLink>
       <NavLink to='/following' className={(prop) => (prop.isActive ? cs.navLinkOn : cs.navLinkOff)}>
