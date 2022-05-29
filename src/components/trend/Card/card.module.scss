@@ -3,7 +3,6 @@
 .cardWrapper {
   position: relative;
   width: 240px;
-  height: 360px;
 
   .cardHeader {
     display: flex;
@@ -22,7 +21,7 @@
 
   > time {
     position: absolute;
-    top: 10%;
+    top: 8%;
     right: 6%;
     font-size: 12px;
     color: colors.$GRAY_012;

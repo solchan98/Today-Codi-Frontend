@@ -1,6 +1,7 @@
 @use '/src/styles/constants/colors';
 
 .dropDownWrapper {
+  position: relative;
   z-index: 1;
 
   .dropDownBtn {
@@ -29,6 +30,7 @@
   }
 
   .dropDownListOn {
+    position: absolute;
     display: block;
     width: 120px;
     margin: 4px 0 0;
