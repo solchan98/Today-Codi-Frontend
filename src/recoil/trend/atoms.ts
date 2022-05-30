@@ -3,9 +3,8 @@ import { atom } from 'recoil';
 import { ITrendSearchState } from '../../types/trend';
 
 const TREND_POST_SEARCH_INIT_STATE: ITrendSearchState = {
-  sex: 0,
-  ageRange: '20대',
-  page: 0,
+  sex: 2,
+  ageRange: 'all',
 };
 
 export const trendPostSearchState = atom<ITrendSearchState>({

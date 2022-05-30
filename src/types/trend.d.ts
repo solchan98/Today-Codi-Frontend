@@ -1,7 +1,12 @@
 export interface ITrendSearchState {
   sex: number;
   ageRange: string;
-  page: number;
+}
+
+export interface ITrendPostList {
+  data: ITrendPostResponse[];
+  nextPage: number | null;
+  isLast: boolean;
 }
 
 export interface ITrendPostResponse {
