@@ -14,8 +14,13 @@
 
   .cardWrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 480px;
+    grid-template-columns: repeat(1, 1fr);
+    width: 240px;
+
+    @include responsive.after('ML') {
+      grid-template-columns: repeat(2, 1fr);
+      width: 480px;
+    }
 
     @include responsive.after('MD') {
       grid-template-columns: repeat(3, 1fr);
