@@ -10,6 +10,7 @@ const TEMP_SEX_WORD_LIST = ['전체', '남', '여'];
 const TEMP_AGE_WORD_LIST = ['전체', '10대', '20대', '30대', '40대', '50대']; // '전체'는 Request 할 때, 'all'!
 
 const Trend = () => {
+  const { userId } = useAppSelector((state) => state.user);
   const { sex, ageRange, lastId, isLast, trendPosts, isLoading } = useAppSelector((state) => state.trendPost);
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
@@ -55,6 +56,7 @@ const Trend = () => {
             createdAt={String(post.createdAt)}
             commentCnt={post.commentList.length}
             likeCnt={post.likeUserIdList.length}
+            likeIt={post.likeUserIdList.includes(userId ?? -1)}
           />
         ))}
         {!isLoading && <div ref={target} />}

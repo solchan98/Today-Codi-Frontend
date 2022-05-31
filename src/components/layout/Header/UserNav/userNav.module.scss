@@ -3,7 +3,7 @@
 .userNavWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 140px;
   height: 100%;
   margin-left: 12px;
@@ -13,5 +13,21 @@
     font-size: 14px;
     color: colors.$GRAY_02;
     text-decoration: none;
+  }
+
+  .profile {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+  }
+
+  > button {
+    width: 80px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    color: colors.$WHITE;
+    background-color: colors.$THEME;
+    border-radius: 4px;
   }
 }
