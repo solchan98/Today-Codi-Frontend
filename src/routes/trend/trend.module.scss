@@ -15,13 +15,16 @@
   .cardWrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    width: 480px;
 
     @include responsive.after('MD') {
       grid-template-columns: repeat(3, 1fr);
+      width: 720px;
     }
 
     @include responsive.after('LD') {
       grid-template-columns: repeat(4, 1fr);
+      width: 960px;
     }
   }
 }
