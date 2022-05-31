@@ -15,8 +15,8 @@
     > input {
       width: 100%;
       font-size: 14px;
+      color: colors.$BASIC_TEXT;
       vertical-align: middle;
-      border: none;
 
       &:focus {
         outline: none;
