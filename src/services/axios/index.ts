@@ -1,4 +1,4 @@
-import store from 'storejs';
+import store from 'store';
 import axios, { AxiosRequestConfig } from 'axios';
 
 const BASE_URL = String(process.env.REACT_APP_BASE_URL);
