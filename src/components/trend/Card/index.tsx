@@ -1,3 +1,5 @@
+import cx from 'classnames';
+
 import cs from './card.module.scss';
 import ProfileCircle from '../../common/ProfileCircle';
 import { Comment, Heart } from '../../../assets/svgs';
@@ -9,9 +11,10 @@ interface Props {
   image: string;
   likeCnt: number;
   commentCnt: number;
+  likeIt: boolean;
 }
 
-const Card = ({ nickname, profileImg, createdAt, image, likeCnt, commentCnt }: Props) => {
+const Card = ({ nickname, profileImg, createdAt, image, likeCnt, commentCnt, likeIt }: Props) => {
   return (
     <div className={cs.cardWrapper}>
       <div className={cs.cardHeader}>
@@ -24,7 +27,7 @@ const Card = ({ nickname, profileImg, createdAt, image, likeCnt, commentCnt }: P
       </main>
       <div className={cs.cardFooter}>
         <p>
-          <Heart />
+          <Heart className={cx(likeIt && cs.likeIt)} />
           <span>{likeCnt}</span>
         </p>
         <p>

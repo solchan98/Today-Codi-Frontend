@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route index element={<div>Index Page!!!</div>} />
+      <Route index element={!isLoggedIn ? <div>Index Page!!!</div> : <Navigate to='/trend' />} />
       <Route path='sign-up' element={!isLoggedIn ? <div>SignUp</div> : <Navigate to='/trend' />} />
       <Route path='login/*' element={!isLoggedIn ? <Login /> : <Navigate to='/trend' />} />
       <Route element={isLoggedIn ? <Layout /> : <Navigate to='/login' />}>
