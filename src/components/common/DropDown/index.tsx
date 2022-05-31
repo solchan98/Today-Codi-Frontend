@@ -3,22 +3,27 @@ import { useClickAway } from 'react-use';
 import { useRef, useState, MouseEvent } from 'react';
 
 import cs from './dropDown.module.scss';
+import { useAppDispatch } from '../../../redux/store';
 
 interface Props {
   title: string;
+  selectedValue: number | string;
   valList: string[];
+  onSelectHandler: Function;
 }
 
-const DropDown = ({ title, valList }: Props) => {
+const DropDown = ({ title, selectedValue, valList, onSelectHandler }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedVal, setSelectedVal] = useState(valList[0]);
 
   const ref = useRef(null);
 
+  const dispatch = useAppDispatch();
+
   const onClickDropDown = () => setIsOpen(true);
   const onClickItem = (e: MouseEvent<HTMLButtonElement>) => {
-    setSelectedVal(String(e.currentTarget.dataset.set));
+    dispatch(onSelectHandler({ value: e.currentTarget.dataset.set }));
     setIsOpen(false);
+    onSelectHandler();
   };
 
   useClickAway(ref, () => setIsOpen(false));
@@ -32,7 +37,7 @@ const DropDown = ({ title, valList }: Props) => {
         {valList.map((value) => (
           <li key={`drop_list_${value}`}>
             <button
-              className={cx(selectedVal === value && cs.selectedVal)}
+              className={cx(selectedValue === value && cs.selectedVal)}
               type='button'
               data-set={value}
               onClick={onClickItem}

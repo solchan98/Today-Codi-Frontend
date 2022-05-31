@@ -1,14 +1,3 @@
-export interface ITrendSearchState {
-  sex: number;
-  ageRange: string;
-}
-
-export interface ITrendPostList {
-  data: ITrendPostResponse[];
-  nextPage: number | null;
-  isLast: boolean;
-}
-
 export interface ITrendPostResponse {
   user: IUser;
   postId: number;

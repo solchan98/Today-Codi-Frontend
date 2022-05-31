@@ -1,28 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 import App from './App';
+import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 
 import './styles/index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const queryClient = new QueryClient();
-
 root.render(
-  // <React.StrictMode>
-  <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
+  <Provider store={store}>
+    <RecoilRoot>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </QueryClientProvider>
-  </RecoilRoot>
-  // </React.StrictMode>
+    </RecoilRoot>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
