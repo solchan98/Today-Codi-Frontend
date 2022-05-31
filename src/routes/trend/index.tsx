@@ -1,27 +1,30 @@
-import { useRecoilState } from 'recoil';
-import { useInfiniteQuery } from 'react-query';
-
 import cs from './trend.module.scss';
-import Card from '../../components/trend/Card';
-import DropDown from '../../components/common/DropDown';
-import { getTrendPostList } from '../../services/trend';
-import { trendPostSearchState } from '../../recoil/trend/atoms';
+import Card from 'components/trend/Card';
+import DropDown from 'components/common/DropDown';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import getTrend from 'redux/store/slices/trendPostSlice';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 const TEMP_SEX_WORD_LIST = ['전체', '남', '여'];
 const TEMP_AGE_WORD_LIST = ['전체', '10대', '20대', '30대', '40대', '50대']; // '전체'는 Request 할 때, 'all'!
 
 const Trend = () => {
-  const [trendPostSearch, setTrendPostSearch] = useRecoilState(trendPostSearchState);
-
-  const { data, fetchNextPage, isLoading } = useInfiniteQuery(
-    ['#trendPostSearch', trendPostSearch],
-    (page) => getTrendPostList(trendPostSearch, page.pageParam),
-    {
-      staleTime: 1000 * 6 * 3, // TODO: 캐시타임 잘 고려해보기!
-      getNextPageParam: (lastPage) => (lastPage.nextPage !== null ? lastPage.nextPage : undefined),
+  const { sex, ageRange, lastId, isLast, trendPosts, isLoading } = useAppSelector((state) => state.trendPost);
+  const dispatch = useAppDispatch();
+  const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
+    if (entry.isIntersecting && !isLoading && !isLast) {
+      dispatch(getTrend({ sex, ageRange, lastId }));
+      observer.unobserve(entry.target);
+    } else {
+      observer.observe(entry.target);
     }
-  );
-  const dataList = data?.pages.map((page) => [...page.data]).flat();
+  };
+  const { target } = useIntersectionObserver({
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // <div>가 50% 보여지면 호출
+    onIntersect,
+  });
 
   return (
     <div className={cs.trend}>
@@ -31,7 +34,7 @@ const Trend = () => {
         <DropDown title='나이' valList={TEMP_AGE_WORD_LIST} />
       </div>
       <div className={cs.cardWrapper}>
-        {dataList?.map((post) => (
+        {trendPosts.map((post) => (
           <Card
             key={post.postId}
             nickname={post.user.nickname}
@@ -42,11 +45,7 @@ const Trend = () => {
             likeCnt={post.likeUserIdList.length}
           />
         ))}
-        {/* TODO: 로딩 이쁘게! 버튼은 지울거야! */}
-        {isLoading && <div>...로딩중!</div>}
-        <button type='button' onClick={() => fetchNextPage()}>
-          버튼
-        </button>
+        {!isLoading && <div ref={target} />}
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
-import MainPoster from '../../components/board/MainPoster/inedx';
 import cs from './board.module.scss';
-import HashTag from '../../components/common/HashTag';
-import ProfileCircle from '../../components/common/ProfileCircle';
-import CommentInput from '../../components/board/CommentInput';
-import Comment from '../../components/board/Comment';
+
+import HashTag from 'components/common/HashTag';
+import Comment from 'components/board/Comment';
+import MainPoster from 'components/board/MainPoster/inedx';
+import CommentInput from 'components/board/CommentInput';
+import ProfileCircle from 'components/common/ProfileCircle';
 
 const IMG_URL =
   'https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/160493273035082504.jpeg?gif=1&w=36&h=36&c=c';
