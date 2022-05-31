@@ -2,8 +2,9 @@ import cs from './trend.module.scss';
 import Card from 'components/trend/Card';
 import DropDown from 'components/common/DropDown';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import getTrend from 'redux/store/slices/trendPostSlice';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import { getTrend } from '../../redux/thunk/trendPostThunk';
+import { changeAgeRangeCondition, changeSexCondition } from '../../redux/store/slices/trendPostSlice';
 
 const TEMP_SEX_WORD_LIST = ['전체', '남', '여'];
 const TEMP_AGE_WORD_LIST = ['전체', '10대', '20대', '30대', '40대', '50대']; // '전체'는 Request 할 때, 'all'!
@@ -30,8 +31,19 @@ const Trend = () => {
     <div className={cs.trend}>
       <div className={cs.dropDownWrapper}>
         {/* TODO: 인피니티 스크롤 구현하기 */}
-        <DropDown title='성별' valList={TEMP_SEX_WORD_LIST} />
-        <DropDown title='나이' valList={TEMP_AGE_WORD_LIST} />
+        <DropDown
+          title='성별'
+          // TODO: trendPostSlice 33번 줄과 같은 고민..
+          selectedValue={sex === 2 ? '전체' : sex === 0 ? '남' : '여'}
+          valList={TEMP_SEX_WORD_LIST}
+          onSelectHandler={changeSexCondition}
+        />
+        <DropDown
+          title='나이'
+          selectedValue={ageRange}
+          valList={TEMP_AGE_WORD_LIST}
+          onSelectHandler={changeAgeRangeCondition}
+        />
       </div>
       <div className={cs.cardWrapper}>
         {trendPosts.map((post) => (

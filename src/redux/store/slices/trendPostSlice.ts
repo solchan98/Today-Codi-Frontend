@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getTrendPostList } from 'services/trend';
+import { createSlice, Draft } from '@reduxjs/toolkit';
+
 import { ITrendPostResponse } from 'types/trend';
+import { getTrend } from '../../thunk/trendPostThunk';
 
 interface CommonState {
   sex: number;
@@ -13,29 +14,33 @@ interface CommonState {
 
 const initialState: CommonState = {
   sex: 2,
-  ageRange: 'all',
+  ageRange: '전체',
   lastId: undefined,
   isLast: false,
   isLoading: false,
   trendPosts: [] as ITrendPostResponse[],
 };
 
-interface ISearchInfo {
-  sex: number;
-  ageRange: string;
-  lastId: number | undefined;
-}
-
-const getTrend = createAsyncThunk('GET/TRENDPOST', async ({ lastId, sex, ageRange }: ISearchInfo) => {
-  const res = await getTrendPostList(lastId, sex, ageRange);
-  return res;
-});
-
 export const trendPostSlice = createSlice({
   name: 'trendPost',
   initialState,
-  reducers: {},
+  reducers: {
+    // TODO: reducer를 따로 빼서 작업하는 것도 고려중
+    changeSexCondition: (state, action) => {
+      const { value } = action.payload;
+      setInitPostsAndLast(state);
+      // eslint-disable-next-line no-nested-ternary
+      state.sex = value === '전체' ? 2 : value === '남' ? 0 : 1; // TODO: If 문으로 빼자니.. 너무 길어지고.. 메서드로 빼자니 관심사 분리가 애매하고..
+      getTrend({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
+    },
+    changeAgeRangeCondition: (state, action) => {
+      setInitPostsAndLast(state);
+      state.ageRange = action.payload.value;
+      getTrend({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
+    },
+  },
   extraReducers: (builder) => {
+    // TODO: extraReducers를 따로 빼서 작업하는 것도 고려중
     builder
       .addCase(getTrend.pending, (state, action) => {
         console.log('pending');
@@ -52,4 +57,10 @@ export const trendPostSlice = createSlice({
   },
 });
 
-export default getTrend;
+const setInitPostsAndLast = (state: Draft<CommonState>) => {
+  state.trendPosts = [];
+  state.lastId = undefined;
+  state.isLast = false;
+};
+
+export const { changeSexCondition, changeAgeRangeCondition } = trendPostSlice.actions;
