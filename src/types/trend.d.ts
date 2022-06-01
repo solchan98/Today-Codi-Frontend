@@ -1,4 +1,4 @@
-export interface ITrendPostResponse {
+export interface IPostResponse {
   user: IUser;
   postId: number;
   content: string;
@@ -10,6 +10,7 @@ export interface ITrendPostResponse {
   tagList: ITag[];
   likeUserIdList: number[];
   markerList: IMarker[];
+  isFollowing: boolean;
 }
 
 interface IUser {
@@ -21,6 +22,8 @@ interface IUser {
 
 interface IComment {
   commentId: number;
+  userNickname: string;
+  profileImg: string;
   content: string;
   createdAt: Date;
 }

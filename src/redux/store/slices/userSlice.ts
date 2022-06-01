@@ -1,6 +1,7 @@
 import store from 'store';
 import { createSlice, Draft } from '@reduxjs/toolkit';
 import { getUserInfo, login } from '../../thunk/userThunk';
+import { authApi } from 'services/axios';
 
 interface CommonState {
   userId: number | undefined;
@@ -19,7 +20,13 @@ const initialState: CommonState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    initUser: (state, action) => {
+      setInitUserInfo(state);
+      authApi.defaults.headers.common.authorization = '';
+      store.remove('accessToken');
+    },
+  },
   extraReducers: (builder) => {
     // TODO: extraReducers를 따로 빼서 작업하는 것도 고려중
     builder
@@ -28,9 +35,10 @@ export const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         console.log('fulfilled');
-        const { userId, nickname, profileImg } = action.payload;
+        const { userId, nickname, profileImg, accessToken } = action.payload;
         setUserInfoByLogin(state, userId, nickname, profileImg);
-        store.set('accessToken', action.payload.accessToken); // TODO: 토큰 접근 키 상수화 및 어떤 스토리지 사용할지 고민
+        store.set('accessToken', accessToken); // TODO: 토큰 접근 키 상수화 및 어떤 스토리지 사용할지 고민
+        authApi.defaults.headers.common.Authorization = `Bearer ${action.payload.accessToken}`;
       })
       .addCase(login.rejected, (state, action) => {
         console.log('rejected');
@@ -38,9 +46,10 @@ export const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         console.log('fulfilled');
-        const { userId, nickname, profileImg } = action.payload;
+        const { userId, nickname, profileImg, accessToken } = action.payload;
         setUserInfoByLogin(state, userId, nickname, profileImg);
-        store.set('accessToken', action.payload.accessToken); // TODO: 토큰 접근 키 상수화 및 어떤 스토리지 사용할지 고민
+        store.set('accessToken', accessToken); // TODO: 토큰 접근 키 상수화 및 어떤 스토리지 사용할지 고민
+        authApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
         console.log('rejected');
@@ -63,3 +72,5 @@ const setUserInfoByLogin = (state: Draft<CommonState>, userId: number, nickname:
   state.profileImg = profileImg;
   state.isLoggedIn = true;
 };
+
+export const { initUser } = userSlice.actions;
