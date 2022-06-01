@@ -52,6 +52,10 @@
         background-color: colors.$THEME;
         border-radius: 4px;
       }
+
+      .isFollowing {
+        background-color: colors.$GRAY_01;
+      }
     }
 
     .asideContentWrapper {

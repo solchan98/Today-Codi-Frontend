@@ -30,7 +30,7 @@ const App = () => {
       <Route element={isLoggedIn ? <Layout /> : <Navigate to='/login' />}>
         <Route path='trend'>
           <Route index element={<Trend />} />
-          <Route path=':id' element={<Board />} />
+          <Route path='post' element={<Board />} />
         </Route>
         <Route path='following' element={<div>Following</div>} />
       </Route>

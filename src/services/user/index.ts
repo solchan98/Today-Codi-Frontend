@@ -1,4 +1,4 @@
-import { basicApi } from '../axios';
+import { authApi, basicApi } from '../axios';
 
 export const loginAPI = (name: string, password: string) => {
   return basicApi
@@ -13,7 +13,7 @@ export const loginAPI = (name: string, password: string) => {
 };
 
 export const getUserInfoAPI = (accessToken: string) => {
-  return basicApi
+  return authApi
     .get('/auth/user', {
       headers: {
         authorization: `Bearer ${accessToken}`,

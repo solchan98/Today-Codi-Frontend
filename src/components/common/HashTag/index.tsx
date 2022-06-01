@@ -10,7 +10,7 @@ const HashTag = ({ name }: Props) => {
 
   const onHashTagClick = () => {
     // TODO: 해시태그 값을 통해 검색 결과 페이지로 이동시킨다.
-    nav('/');
+    nav('..');
   };
   return (
     <button className={cs.hashTag} type='button' onClick={onHashTagClick}>

@@ -1,19 +1,21 @@
 import cs from './comment.module.scss';
 import ProfileCircle from '../../common/ProfileCircle';
 
-const IMG_URL =
-  'https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/160493273035082504.jpeg?gif=1&w=36&h=36&c=c';
+const DEFAULT_IMG_URL =
+  'https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?w=72&h=72&c=c';
 
 interface Props {
+  nickname: string;
+  profileImg: string | null;
   content: string;
 }
 
-const Comment = ({ content }: Props) => {
+const Comment = ({ nickname, profileImg, content }: Props) => {
   return (
     <div className={cs.commentsWrapper}>
       <div className={cs.commentUserInfo}>
-        <ProfileCircle url={IMG_URL} />
-        <p>sund_home</p>
+        <ProfileCircle url={profileImg ?? DEFAULT_IMG_URL} />
+        <p>{nickname}</p>
       </div>
       <p>{content}</p>
     </div>

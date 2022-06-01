@@ -1,14 +1,15 @@
 import cs from './showInfoButton.module.scss';
 
 interface Props {
-  top: string;
-  left: string;
+  top: number;
+  left: number;
+  link: string;
 }
 
-const ShowInfoButton = ({ top, left }: Props) => {
+const ShowInfoButton = ({ top, left, link }: Props) => {
   return (
     <a
-      href='https://naver.com'
+      href={link}
       target='_blank'
       title='상품 페이지로 이동합니다!'
       style={{ top: `${top}%`, left: `${left}%` }}

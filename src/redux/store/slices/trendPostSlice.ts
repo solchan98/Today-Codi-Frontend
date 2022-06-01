@@ -1,6 +1,6 @@
 import { createSlice, Draft } from '@reduxjs/toolkit';
 
-import { ITrendPostResponse } from 'types/trend';
+import { IPostResponse } from 'types/trend';
 import { getTrend } from '../../thunk/trendPostThunk';
 
 interface CommonState {
@@ -9,7 +9,7 @@ interface CommonState {
   lastId: number | undefined;
   isLast: boolean;
   isLoading: boolean;
-  trendPosts: ITrendPostResponse[];
+  trendPosts: IPostResponse[];
 }
 
 const initialState: CommonState = {
@@ -18,7 +18,7 @@ const initialState: CommonState = {
   lastId: undefined,
   isLast: false,
   isLoading: false,
-  trendPosts: [] as ITrendPostResponse[],
+  trendPosts: [] as IPostResponse[],
 };
 
 export const trendPostSlice = createSlice({

@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import cs from './board.module.scss';
 
 import HashTag from 'components/common/HashTag';
@@ -5,43 +6,49 @@ import Comment from 'components/board/Comment';
 import MainPoster from 'components/board/MainPoster/inedx';
 import CommentInput from 'components/board/CommentInput';
 import ProfileCircle from 'components/common/ProfileCircle';
-
-const IMG_URL =
-  'https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/160493273035082504.jpeg?gif=1&w=36&h=36&c=c';
+import { useLocation } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { getPost } from '../../services/post';
+import { IPostResponse } from 'types/trend';
+import { useMount } from 'react-use';
+import dayjs from 'dayjs';
+import { useAppSelector } from 'redux/store';
 
 const Board = () => {
+  const { userId } = useAppSelector((state) => state.user);
+  const location = useLocation();
+  const postId = useRef(location.search.split('=')[1]);
+  const [post, setPost] = useState<IPostResponse>({} as IPostResponse);
+
+  useMount(() => {
+    getPost(Number(postId.current)).then((res) => setPost(res));
+  });
+
+  if (post.postId === undefined) return <div>로딩중</div>;
+
   return (
     <div className={cs.boardWrapper}>
       <div>
         <div className={cs.boardHeader}>
           <ul>
             {/* TODO: TAG MAX COUNT 16 */}
-            <HashTag name='코디' />
-            <HashTag name='대학생' />
-            <HashTag name='트렌드' />
-            <HashTag name='코디' />
-            <HashTag name='대학생' />
-            <HashTag name='트렌드' />
-            <HashTag name='코디' />
-            <HashTag name='대학생' />
-            <HashTag name='트렌드' />
-            <HashTag name='코디' />
-            <HashTag name='대학생' />
-            <HashTag name='트렌드' />
-            <HashTag name='코디' />
-            <HashTag name='대학생' />
+            {post.tagList.map((tag) => (
+              <HashTag key={tag.tagId} name={tag.title} />
+            ))}
           </ul>
-          <time>2022-05-12</time>
+          <time dateTime='2001-05-15'>{dayjs(post.createdAt).format('YYYY-MM-DD')}</time>
         </div>
-        <MainPoster />
+        <MainPoster image={post.mainImg} markerList={post.markerList} />
       </div>
       <aside className={cs.asideWrapper}>
         <div className={cs.userInfoWrapper}>
-          <ProfileCircle url={IMG_URL} />
-          <p>sund_home</p>
-          <button className={cs.followButton} type='button'>
-            팔로우
-          </button>
+          <ProfileCircle url={post.user.profileImg} />
+          <p>{post.user.nickname}</p>
+          {post.user.userId !== userId && (
+            <button className={cx(cs.followButton, post.isFollowing && cs.isFollowing)} type='button'>
+              {post.isFollowing ? '팔로잉' : '팔로우'}
+            </button>
+          )}
         </div>
         <div className={cs.asideContentWrapper}>
           <p className={cs.asideContentIndex}>한줄 소개</p>
@@ -49,14 +56,19 @@ const Board = () => {
         </div>
         <div className={cs.asideContentWrapper}>
           <p className={cs.asideContentIndex}>
-            댓글 <mark>3</mark>
+            댓글 <mark>{post.commentList.length}</mark>
           </p>
           <CommentInput />
         </div>
         <ul>
-          <Comment content='호호호 바지에 마커가 없는데 혹시 바지 정보좀 알 수 있을까요?!?' />
-          <Comment content='호호호 바지에 마커가 없는데 혹시 바지 정보좀 알 수 있을까요?!?' />
-          <Comment content='호호호 바지에 마커가 없는데 혹시 바지 정보좀 알 수 있을까요?!?' />
+          {post.commentList.map((comment) => (
+            <Comment
+              key={comment.commentId}
+              nickname={comment.userNickname}
+              profileImg={comment.profileImg}
+              content={comment.content}
+            />
+          ))}
         </ul>
       </aside>
     </div>
