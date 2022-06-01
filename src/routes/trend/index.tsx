@@ -3,7 +3,7 @@ import Card from 'components/trend/Card';
 import DropDown from 'components/common/DropDown';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import { getTrend } from '../../redux/thunk/trendPostThunk';
+import { getTrendThunk } from '../../redux/thunk/trendPostThunk';
 import { changeAgeRangeCondition, changeSexCondition } from '../../redux/store/slices/trendPostSlice';
 import { initUser } from '../../redux/store/slices/userSlice';
 
@@ -16,7 +16,7 @@ const Trend = () => {
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (entry.isIntersecting && !isLoading && !isLast) {
-      dispatch(getTrend({ sex, ageRange, lastId }))
+      dispatch(getTrendThunk({ sex, ageRange, lastId }))
         .unwrap()
         .catch((err) => {
           if (err.message.includes('401')) {
@@ -64,7 +64,7 @@ const Trend = () => {
             createdAt={String(post.createdAt)}
             commentCnt={post.commentList.length}
             likeCnt={post.likeUserIdList.length}
-            likeIt={post.likeUserIdList.includes(user.userId ?? -1)}
+            likeIt={post.likeIt}
           />
         ))}
         {!isLoading && <div ref={target} />}
