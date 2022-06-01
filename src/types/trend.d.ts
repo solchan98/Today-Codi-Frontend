@@ -11,6 +11,7 @@ export interface IPostResponse {
   likeUserIdList: number[];
   markerList: IMarker[];
   isFollowing: boolean;
+  likeIt: boolean;
 }
 
 interface IUser {

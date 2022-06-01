@@ -4,6 +4,8 @@ import cs from './card.module.scss';
 import ProfileCircle from '../../common/ProfileCircle';
 import { Comment, Heart } from 'assets/svgs';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { addHeartThunk, removeHeartThunk } from '../../../redux/thunk/trendPostThunk';
 
 interface Props {
   postId: number;
@@ -16,15 +18,27 @@ interface Props {
   likeIt: boolean;
 }
 
+const DEFAULT_IMG_URL =
+  'https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?w=72&h=72&c=c';
+
 const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, commentCnt, likeIt }: Props) => {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
+  const { userId } = useAppSelector((state) => state.user);
   const onCardClick = () => {
     nav(`post?postId=${postId}`);
+  };
+  const onHeartClick = () => {
+    if (likeIt) {
+      dispatch(removeHeartThunk({ userId, postId }));
+    } else {
+      dispatch(addHeartThunk({ userId, postId }));
+    }
   };
   return (
     <div className={cs.cardWrapper}>
       <div className={cs.cardHeader}>
-        <ProfileCircle url={profileImg} />
+        <ProfileCircle url={profileImg ?? DEFAULT_IMG_URL} />
         <p>{nickname}</p>
       </div>
       <time>{createdAt}</time>
@@ -32,14 +46,14 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
         <img src={image} alt='img' />
       </button>
       <div className={cs.cardFooter}>
-        <p>
+        <button type='button' onClick={onHeartClick}>
           <Heart className={cx(likeIt && cs.likeIt)} />
           <span>{likeCnt}</span>
-        </p>
-        <p>
+        </button>
+        <button type='button' onClick={onCardClick}>
           <Comment />
           <span>{commentCnt}</span>
-        </p>
+        </button>
       </div>
     </div>
   );
