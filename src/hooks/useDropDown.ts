@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export const useDropDown = (stateList: string[], onChangeHandler: Function) => {
+export const useDropDown = (stateList: string[]) => {
   const [state, setState] = useState(stateList[0]);
 
-  const onChangeDropDownState = () => {
-    onChangeHandler();
+  const changeState = (name: string) => {
+    setState(name);
   };
 
-  return { state, setState };
+  return { state, changeState };
 };

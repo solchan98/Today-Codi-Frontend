@@ -1,0 +1,63 @@
+@use '/src/styles/constants/colors';
+
+.newPostWrapper {
+  > form {
+    display: flex;
+    width: 60%;
+
+    .newPostMainWrapper {
+      padding-right: 12px;
+
+      > p {
+        margin-bottom: 4px;
+        font-size: 12px;
+        opacity: 0.4;
+      }
+
+      .dropDownWrapper {
+        display: flex;
+        justify-content: flex-start;
+        width: 480px;
+        margin: 24px 0;
+
+        > div + div {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .newPostAsideWrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 68px 0 0 24px;
+
+      > button {
+        position: absolute;
+        top: 22px;
+        right: 0;
+        width: 64px;
+        height: 24px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: colors.$WHITE;
+        background-color: colors.$THEME;
+        border-radius: 4px;
+      }
+
+      > textarea {
+        width: 320px;
+        height: 36px;
+        padding: 0 12px;
+        margin-bottom: 24px;
+        font-size: 16px;
+        line-height: 36px;
+        color: colors.$BASIC_TEXT;
+        resize: none;
+        border-color: colors.$GRAY_01;
+        border-radius: 4px;
+      }
+    }
+  }
+}
