@@ -1,0 +1,12 @@
+@use '/src/styles/constants/colors';
+
+.writeMakerList {
+  width: 100%;
+
+  > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 6px;
+    border-bottom: 1px solid colors.$BORDER_LINE;
+  }
+}

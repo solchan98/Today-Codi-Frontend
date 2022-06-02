@@ -3,7 +3,7 @@ import { getTrendPostList } from '../../services/trend';
 import { addHeart, removeHeart } from '../../services/post';
 
 interface ISearchInfo {
-  sex: number;
+  sex: string;
   ageRange: string;
   lastId: number | undefined;
 }
@@ -13,7 +13,7 @@ interface IHeart {
   postId: number;
 }
 
-export const getTrendThunk = createAsyncThunk('GET/TRENDPOST', async ({ lastId, sex, ageRange }: ISearchInfo) => {
+export const getTrendThunk = createAsyncThunk('GET/TRENDPOST', async ({ sex, lastId, ageRange }: ISearchInfo) => {
   const res = await getTrendPostList(lastId, sex, ageRange);
   return res;
 });

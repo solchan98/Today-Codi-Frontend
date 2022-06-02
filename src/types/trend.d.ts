@@ -35,7 +35,8 @@ interface ITag {
 }
 
 interface IMarker {
-  marker: number;
+  name?: string;
+  marker: number; // markerId
   width: number;
   height: number;
   link: string;

@@ -4,7 +4,7 @@ import { IPostResponse } from 'types/trend';
 import { addHeartThunk, getTrendThunk, removeHeartThunk } from '../../thunk/trendPostThunk';
 
 interface CommonState {
-  sex: number;
+  sex: string;
   ageRange: string;
   lastId: number | undefined;
   isLast: boolean;
@@ -13,7 +13,7 @@ interface CommonState {
 }
 
 const initialState: CommonState = {
-  sex: 2,
+  sex: '전체',
   ageRange: '전체',
   lastId: undefined,
   isLast: false,
@@ -27,15 +27,13 @@ export const trendPostSlice = createSlice({
   reducers: {
     // TODO: reducer를 따로 빼서 작업하는 것도 고려중
     changeSexCondition: (state, action) => {
-      const { value } = action.payload;
       setInitPostsAndLast(state);
-      // eslint-disable-next-line no-nested-ternary
-      state.sex = value === '전체' ? 2 : value === '남' ? 0 : 1; // TODO: If 문으로 빼자니.. 너무 길어지고.. 메서드로 빼자니 관심사 분리가 애매하고..
+      state.sex = action.payload;
       getTrendThunk({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
     },
     changeAgeRangeCondition: (state, action) => {
       setInitPostsAndLast(state);
-      state.ageRange = action.payload.value;
+      state.ageRange = action.payload;
       getTrendThunk({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
     },
   },

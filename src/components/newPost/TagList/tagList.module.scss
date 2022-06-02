@@ -1,0 +1,19 @@
+.tagList {
+  width: 320px;
+  height: 82px;
+  overflow-y: scroll;
+
+  .tag {
+    margin-right: 6px;
+    font-size: 16px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  > input {
+    width: 72px;
+    padding: 2px 6px;
+  }
+}
