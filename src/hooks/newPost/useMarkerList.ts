@@ -32,6 +32,7 @@ export const useMarkerList = (image: string): ReturnTypes => {
         link: '',
       };
       setMarkerList((prev) => [marker, ...prev]);
+      setSelectedMarker(marker.marker);
     }
   };
   const removeMarker = (id: number) => {
