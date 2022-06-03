@@ -12,7 +12,7 @@ interface IHeart {
   postId: number;
 }
 
-export const getTrendThunk = createAsyncThunk('GET/TREND_POST', async ({ sex, lastId, ageRange }: ISearchInfo) => {
+export const getTrendThunk = createAsyncThunk('GET/TREND_POST_LIST', async ({ sex, lastId, ageRange }: ISearchInfo) => {
   const res = await getTrendPostList(lastId, sex, ageRange);
   return res;
 });

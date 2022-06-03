@@ -24,7 +24,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
   const dispatch = useAppDispatch();
   const { userId } = useAppSelector((state) => state.user);
   const onCardClick = () => {
-    nav(`post?postId=${postId}`);
+    nav(`/post?postId=${postId}`);
   };
   const onHeartClick = () => {
     if (isLike) {

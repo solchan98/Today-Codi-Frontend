@@ -42,6 +42,8 @@ export const trendPostExtraReducers = (builder: ActionReducerMapBuilder<CommonSt
     })
     .addCase(createPostThunk.pending, (state, action) => {})
     .addCase(createPostThunk.fulfilled, (state, action) => {
+      action.payload.likeCnt = 0;
+      action.payload.commentCnt = 0;
       state.trendPosts = [action.payload, ...state.trendPosts];
     });
   return builder;

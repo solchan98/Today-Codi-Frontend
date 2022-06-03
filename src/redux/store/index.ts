@@ -1,14 +1,17 @@
 import { createLogger } from 'redux-logger';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { trendPostSlice } from './slices/trendPostSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+
 import { userSlice } from './slices/userSlice';
+import { trendPostSlice } from './slices/trendPostSlice';
+import { followingPostSlice } from './slices/followingPostSlice';
 
 const logger = createLogger();
 
 const rootReducer = combineReducers({
-  trendPost: trendPostSlice.reducer,
   user: userSlice.reducer,
+  trendPost: trendPostSlice.reducer,
+  followingPost: followingPostSlice.reducer,
 });
 
 export const store = configureStore({

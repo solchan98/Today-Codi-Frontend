@@ -12,6 +12,7 @@ import { getUserInfo } from 'redux/thunk/userThunk';
 import { useAppDispatch, useAppSelector } from './redux/store';
 
 import './App.css';
+import Following from './routes/following';
 
 const App = () => {
   const { isLoggedIn } = useAppSelector((state) => state.user);
@@ -30,9 +31,9 @@ const App = () => {
       <Route element={isLoggedIn ? <Layout /> : <Navigate to='/login' />}>
         <Route path='trend'>
           <Route index element={<Trend />} />
-          <Route path='post' element={<Board />} />
         </Route>
-        <Route path='following' element={<div>Following</div>} />
+        <Route path='following' element={<Following />} />
+        <Route path='post' element={<Board />} />
         <Route path='new-post' element={isLoggedIn ? <NewPost /> : <Navigate to='/login' />} />
       </Route>
       <Route path='sign-up' element={!isLoggedIn ? <div>SignUp</div> : <Navigate to='/trend' />} />

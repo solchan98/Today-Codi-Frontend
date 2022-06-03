@@ -26,3 +26,9 @@ export const getTrendPostList = async (lastId: number | undefined, sex = '전체
   const result = await authApi.get<IPostThumbnailResponse[]>(`/trend?sex=${sex}&ageRange=${ageRange}${postFix}`);
   return result.data;
 };
+
+export const getFollowingPostList = async (lastId: number | undefined) => {
+  const postFix = lastId ? `?&lastId=${lastId}` : '';
+  const result = await authApi.get<IPostThumbnailResponse[]>(`/following${postFix}`);
+  return result.data;
+};
