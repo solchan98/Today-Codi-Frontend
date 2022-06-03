@@ -54,6 +54,7 @@ const NewPost = () => {
   const onRemoveImage = () => {
     setImage('');
     setImageFile(undefined);
+    setMarkerList([]);
   };
 
   return (
@@ -64,14 +65,12 @@ const NewPost = () => {
             <DropDown title='성별' selectedValue={sex} valList={SEX_WORD_LIST} onChangeHandler={changeSex} />
             <DropDown title='나이' selectedValue={ageRange} valList={AGE_WORD_LIST} onChangeHandler={changeAgeRange} />
           </div>
-          {image && (
-            <div className={cs.imageSideInfo}>
-              <p>이미지를 클릭하여 마커를 추가하세요!</p>
-              <button type='button' onClick={onRemoveImage}>
-                이미지 제거
-              </button>
-            </div>
-          )}
+          <div className={cs.imageSideInfo}>
+            <p>이미지를 클릭하여 마커를 추가하세요!</p>
+            <button type='button' onClick={onRemoveImage}>
+              <label htmlFor='imgUpload'>{!image ? '이미지 추가' : '이미지 교체'}</label>
+            </button>
+          </div>
           <AddImage
             image={image}
             setImageFile={setImageFile}

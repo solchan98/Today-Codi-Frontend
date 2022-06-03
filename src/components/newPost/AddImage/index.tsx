@@ -27,9 +27,6 @@ const AddImage = ({ image, setImageFile, markerList, selectedMarker, setImage, a
         setImageFile(file);
       };
       reader.readAsDataURL(file);
-    } else {
-      setImage('');
-      setImageFile(undefined);
     }
   };
 
@@ -44,11 +41,6 @@ const AddImage = ({ image, setImageFile, markerList, selectedMarker, setImage, a
         onChange={onFileInputChange}
         onClick={(e) => e.stopPropagation()}
       />
-      {!image && (
-        <label htmlFor='imgUpload'>
-          이미지 추가 <br /> (480 x 720 이미지 추천)
-        </label>
-      )}
       {image && <img src={image} alt='img' draggable={false} />}
       {markerList?.map((marker) => (
         <ShowInfoButton
