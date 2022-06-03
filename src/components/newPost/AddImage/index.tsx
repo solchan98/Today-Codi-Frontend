@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, MouseEventHandler, SetStateAction } from 'react';
 
-import { IMarker } from 'types/trend';
+import { IMarker } from 'types/post';
 
 import cs from './addImage.module.scss';
 import ShowInfoButton from '../../board/MainPoster/ShowInfoButton';
@@ -38,7 +38,7 @@ const AddImage = ({ image, setImageFile, markerList, selectedMarker, setImage, a
       <input
         type='file'
         style={{ display: 'none' }}
-        accept='image/png, image/jpg, image/jpeg, image/gif'
+        accept='image/png, image/jpg, image/jpeg'
         name='profile_img'
         id='imgUpload'
         onChange={onFileInputChange}

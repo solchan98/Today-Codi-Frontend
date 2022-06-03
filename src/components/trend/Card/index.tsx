@@ -16,10 +16,10 @@ interface Props {
   image: string;
   likeCnt: number;
   commentCnt: number;
-  likeIt: boolean;
+  isLike: boolean;
 }
 
-const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, commentCnt, likeIt }: Props) => {
+const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, commentCnt, isLike }: Props) => {
   const nav = useNavigate();
   const dispatch = useAppDispatch();
   const { userId } = useAppSelector((state) => state.user);
@@ -27,7 +27,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
     nav(`post?postId=${postId}`);
   };
   const onHeartClick = () => {
-    if (likeIt) {
+    if (isLike) {
       dispatch(removeHeartThunk({ userId, postId }));
     } else {
       dispatch(addHeartThunk({ userId, postId }));
@@ -45,7 +45,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
       </button>
       <div className={cs.cardFooter}>
         <button type='button' onClick={onHeartClick}>
-          <Heart className={cx(likeIt && cs.likeIt)} />
+          <Heart className={cx(isLike && cs.likeIt)} />
           <span>{likeCnt}</span>
         </button>
         <button type='button' onClick={onCardClick}>

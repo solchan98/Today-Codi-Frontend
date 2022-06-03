@@ -1,6 +1,6 @@
 import cs from './mainPoster.module.scss';
 import ShowInfoButton from './ShowInfoButton';
-import { IMarker } from 'types/trend';
+import { IMarker } from 'types/post';
 
 interface Props {
   image: string;

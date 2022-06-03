@@ -1,6 +1,6 @@
 import { createSlice, Draft } from '@reduxjs/toolkit';
 
-import { IPostResponse } from 'types/trend';
+import { IPostThumbnailResponse } from 'types/post';
 import { addHeartThunk, createPostThunk, getTrendThunk, removeHeartThunk } from '../../thunk/trendPostThunk';
 
 interface CommonState {
@@ -9,7 +9,7 @@ interface CommonState {
   lastId: number | undefined;
   isLast: boolean;
   isLoading: boolean;
-  trendPosts: IPostResponse[];
+  trendPosts: IPostThumbnailResponse[];
 }
 
 const initialState: CommonState = {
@@ -18,7 +18,7 @@ const initialState: CommonState = {
   lastId: undefined,
   isLast: false,
   isLoading: false,
-  trendPosts: [] as IPostResponse[],
+  trendPosts: [] as IPostThumbnailResponse[],
 };
 
 export const trendPostSlice = createSlice({
@@ -47,22 +47,19 @@ export const trendPostSlice = createSlice({
         state.trendPosts = [...state.trendPosts, ...action.payload];
       })
       .addCase(addHeartThunk.fulfilled, (state, action) => {
-        const { userId, postId } = action.payload;
         state.trendPosts = state.trendPosts.map((post) => {
-          if (post.postId === postId) {
-            post.likeUserIdList.push(Number(userId));
-            post.likeIt = true;
+          if (post.postId === action.payload.postId) {
+            post.likeCnt += 1;
+            post.isLike = true;
           }
           return post;
         });
       })
       .addCase(removeHeartThunk.fulfilled, (state, action) => {
-        const { userId, postId } = action.payload;
         state.trendPosts = state.trendPosts.map((post) => {
-          if (post.postId === postId) {
-            const userIndex = post.likeUserIdList.indexOf(Number(userId));
-            post.likeUserIdList.splice(userIndex, 1);
-            post.likeIt = false;
+          if (post.postId === action.payload.postId) {
+            post.likeCnt -= 1;
+            post.isLike = false;
           }
           return post;
         });

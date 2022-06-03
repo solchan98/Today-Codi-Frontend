@@ -1,9 +1,24 @@
+import { IUser } from 'user';
+
+export interface IPostThumbnailResponse {
+  user: {
+    nickname: string;
+    profileImg: string;
+  };
+  mainImg: string;
+  postId: number;
+  createdAt: Date;
+  isLike: boolean;
+  likeCnt: number;
+  commentCnt: number;
+}
+
 export interface IPostResponse {
   user: IUser;
   postId: number;
   content: string;
   mainImg: string;
-  sex: number;
+  sex: string;
   ageRange: string;
   createdAt: Date;
   commentList: IComment[];
@@ -12,13 +27,6 @@ export interface IPostResponse {
   markerList: IMarker[];
   isFollowing: boolean;
   likeIt: boolean;
-}
-
-interface IUser {
-  userId: number;
-  nickname: string;
-  profileImg: string;
-  createdAt: Date;
 }
 
 interface IComment {

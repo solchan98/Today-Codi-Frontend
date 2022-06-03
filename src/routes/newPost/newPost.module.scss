@@ -8,10 +8,16 @@
     .newPostMainWrapper {
       padding-right: 12px;
 
-      > p {
+      .imageSideInfo {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 4px;
-        font-size: 12px;
         opacity: 0.4;
+
+        > p {
+          font-size: 12px;
+          cursor: default;
+        }
       }
 
       .dropDownWrapper {
@@ -48,11 +54,11 @@
 
       > textarea {
         width: 320px;
-        height: 36px;
+        height: 42px;
         padding: 0 12px;
         margin-bottom: 24px;
-        font-size: 16px;
-        line-height: 36px;
+        font-size: 18px;
+        line-height: 42px;
         color: colors.$BASIC_TEXT;
         resize: none;
         border-color: colors.$GRAY_01;

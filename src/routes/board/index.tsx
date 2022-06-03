@@ -9,7 +9,7 @@ import ProfileCircle from 'components/common/ProfileCircle';
 import { useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { getPost } from '../../services/post';
-import { IPostResponse } from 'types/trend';
+import { IPostResponse } from 'types/post';
 import { useMount } from 'react-use';
 import dayjs from 'dayjs';
 import { useAppSelector } from 'redux/store';

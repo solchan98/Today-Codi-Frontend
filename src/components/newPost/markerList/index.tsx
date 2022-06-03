@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, FocusEventHandler, SetStateAction } from 'react';
 
-import { IMarker } from 'types/trend';
+import { IMarker } from 'types/post';
 
 import cs from './markerList.module.scss';
 

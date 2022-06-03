@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getTrendPostList } from '../../services/trend';
-import { addHeart, createPost, removeHeart } from '../../services/post';
+import { getTrendPostList, addHeart, createPost, removeHeart } from 'services/post';
 
 interface ISearchInfo {
   sex: string;

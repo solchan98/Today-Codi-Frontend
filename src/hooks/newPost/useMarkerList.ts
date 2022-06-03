@@ -7,7 +7,7 @@ import {
   SetStateAction,
   useState,
 } from 'react';
-import { IMarker } from 'types/trend';
+import { IMarker } from 'types/post';
 
 type ReturnTypes = [
   IMarker[],

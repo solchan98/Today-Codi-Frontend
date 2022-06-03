@@ -2,14 +2,12 @@ import Card from 'components/trend/Card';
 import DropDown from 'components/common/DropDown';
 import { initUser } from 'redux/store/slices/userSlice';
 import { getTrendThunk } from 'redux/thunk/trendPostThunk';
-import { useAppDispatch, useAppSelector } from 'redux/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import { AGE_WORD_LIST, SEX_WORD_LIST } from 'constant/dropdown';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import { changeAgeRangeCondition, changeSexCondition } from 'redux/store/slices/trendPostSlice';
 
 import cs from './trend.module.scss';
-
-const TEMP_SEX_WORD_LIST = ['전체', '남', '여'];
-const TEMP_AGE_WORD_LIST = ['전체', '10대', '20대', '30대', '40대', '50대']; // '전체'는 Request 할 때, 'all'!
 
 const Trend = () => {
   const user = useAppSelector((state) => state.user);
@@ -48,18 +46,11 @@ const Trend = () => {
   return (
     <div className={cs.trend}>
       <div className={cs.dropDownWrapper}>
-        {/* TODO: 인피니티 스크롤 구현하기 */}
-        <DropDown
-          title='성별'
-          // TODO: trendPostSlice 33번 줄과 같은 고민..
-          selectedValue={sex}
-          valList={TEMP_SEX_WORD_LIST}
-          onChangeHandler={onSexChangeHandler}
-        />
+        <DropDown title='성별' selectedValue={sex} valList={SEX_WORD_LIST} onChangeHandler={onSexChangeHandler} />
         <DropDown
           title='나이'
           selectedValue={ageRange}
-          valList={TEMP_AGE_WORD_LIST}
+          valList={AGE_WORD_LIST}
           onChangeHandler={onAgeRangeChangeHandler}
         />
       </div>
@@ -72,9 +63,9 @@ const Trend = () => {
             profileImg={post.user.profileImg}
             image={post.mainImg}
             createdAt={String(post.createdAt)}
-            commentCnt={post.commentList.length}
-            likeCnt={post.likeUserIdList.length}
-            likeIt={post.likeIt}
+            commentCnt={post.commentCnt}
+            likeCnt={post.likeCnt}
+            isLike={post.isLike}
           />
         ))}
         {!isLoading && <div ref={target} />}
