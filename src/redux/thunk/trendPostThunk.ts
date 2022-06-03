@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getTrendPostList } from '../../services/trend';
-import { addHeart, removeHeart } from '../../services/post';
+import { addHeart, createPost, removeHeart } from '../../services/post';
 
 interface ISearchInfo {
   sex: string;
@@ -13,7 +13,7 @@ interface IHeart {
   postId: number;
 }
 
-export const getTrendThunk = createAsyncThunk('GET/TRENDPOST', async ({ sex, lastId, ageRange }: ISearchInfo) => {
+export const getTrendThunk = createAsyncThunk('GET/TREND_POST', async ({ sex, lastId, ageRange }: ISearchInfo) => {
   const res = await getTrendPostList(lastId, sex, ageRange);
   return res;
 });
@@ -30,3 +30,7 @@ export const removeHeartThunk = createAsyncThunk(
     return { userId, postId };
   }
 );
+
+export const createPostThunk = createAsyncThunk('POST/CREATE_POST', (newPostData: FormData) => {
+  return createPost(newPostData).then((res) => res);
+});

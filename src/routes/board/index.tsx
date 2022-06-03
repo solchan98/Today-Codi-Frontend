@@ -52,7 +52,7 @@ const Board = () => {
         </div>
         <div className={cs.asideContentWrapper}>
           <p className={cs.asideContentIndex}>한줄 소개</p>
-          <p className={cs.asideContent}>더운 요즘! 간단하게 입을 수 있는 후리한 코디</p>
+          <p className={cs.asideContent}>{post.content}</p>
         </div>
         <div className={cs.asideContentWrapper}>
           <p className={cs.asideContentIndex}>

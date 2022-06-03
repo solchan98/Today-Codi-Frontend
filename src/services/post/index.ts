@@ -12,3 +12,8 @@ export const addHeart = (postId: number) => {
 export const removeHeart = (postId: number) => {
   authApi.delete(`/post/like?postId=${postId}`);
 };
+
+export const createPost = async (newPostData: FormData) => {
+  const res = await authApi.post('/post', newPostData);
+  return res.data;
+};

@@ -6,6 +6,7 @@ import { Comment, Heart } from 'assets/svgs';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addHeartThunk, removeHeartThunk } from '../../../redux/thunk/trendPostThunk';
+import dayjs from 'dayjs';
 
 interface Props {
   postId: number;
@@ -38,7 +39,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
         <ProfileCircle url={profileImg} />
         <p>{nickname}</p>
       </div>
-      <time>{createdAt}</time>
+      <time>{dayjs(createdAt).format('YYYY-MM-DD-HH:mm')}</time>
       <button type='button' onClick={onCardClick}>
         <img src={image} alt='img' />
       </button>

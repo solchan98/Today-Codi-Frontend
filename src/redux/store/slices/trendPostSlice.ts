@@ -1,7 +1,7 @@
 import { createSlice, Draft } from '@reduxjs/toolkit';
 
 import { IPostResponse } from 'types/trend';
-import { addHeartThunk, getTrendThunk, removeHeartThunk } from '../../thunk/trendPostThunk';
+import { addHeartThunk, createPostThunk, getTrendThunk, removeHeartThunk } from '../../thunk/trendPostThunk';
 
 interface CommonState {
   sex: string;
@@ -66,6 +66,10 @@ export const trendPostSlice = createSlice({
           }
           return post;
         });
+      })
+      .addCase(createPostThunk.pending, (state, action) => {})
+      .addCase(createPostThunk.fulfilled, (state, action) => {
+        state.trendPosts = [action.payload, ...state.trendPosts];
       });
   },
 });

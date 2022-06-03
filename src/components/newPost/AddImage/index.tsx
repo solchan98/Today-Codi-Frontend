@@ -7,6 +7,7 @@ import ShowInfoButton from '../../board/MainPoster/ShowInfoButton';
 
 interface Props {
   image: string;
+  setImageFile: Dispatch<SetStateAction<File | undefined>>;
   markerList: IMarker[];
   selectedMarker: number;
   setImage: Dispatch<SetStateAction<string>>;
@@ -14,7 +15,7 @@ interface Props {
   setMarkerList: Dispatch<SetStateAction<IMarker[]>>;
 }
 
-const AddImage = ({ image, markerList, selectedMarker, setImage, addMarker, setMarkerList }: Props) => {
+const AddImage = ({ image, setImageFile, markerList, selectedMarker, setImage, addMarker, setMarkerList }: Props) => {
   const onFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setMarkerList([]);
@@ -23,10 +24,12 @@ const AddImage = ({ image, markerList, selectedMarker, setImage, addMarker, setM
       const file = e.currentTarget.files[0];
       reader.onloadend = () => {
         setImage(String(reader.result));
+        setImageFile(file);
       };
       reader.readAsDataURL(file);
     } else {
       setImage('');
+      setImageFile(undefined);
     }
   };
 

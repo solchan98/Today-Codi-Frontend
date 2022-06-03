@@ -14,7 +14,7 @@ const HashTag = ({ name }: Props) => {
   };
   return (
     <button className={cs.hashTag} type='button' onClick={onHashTagClick}>
-      #{name}
+      {name}
     </button>
   );
 };
