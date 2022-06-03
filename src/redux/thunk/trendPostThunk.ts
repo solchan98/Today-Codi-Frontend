@@ -18,7 +18,7 @@ export const getTrendThunk = createAsyncThunk('GET/TREND_POST', async ({ sex, la
 });
 
 export const addHeartThunk = createAsyncThunk('PATCH/HEART', async ({ userId, postId }: IHeart): Promise<IHeart> => {
-  addHeart(postId); // TODO: 일단 백엔드 성공 여부 논외로 좋아요 클릭 처리, 백엔드 리팩토링 작업 후 반영 예정
+  addHeart(postId);
   return { userId, postId };
 });
 

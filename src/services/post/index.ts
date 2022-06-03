@@ -6,6 +6,8 @@ export const getPost = async (postId: number) => {
   return res.data;
 };
 
+// 좋아요 추가 및 취소는 일반적으로 응답받지 않고 반영!
+// 보통 서버에서 메시지 큐 방식으로 구현하기 때문, But 이번 서버에서는 그렇게 하지 않았음.
 export const addHeart = (postId: number) => {
   authApi.patch(`/post/like?postId=${postId}`);
 };

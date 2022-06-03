@@ -1,7 +1,7 @@
-import { createSlice, Draft } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IPostThumbnailResponse } from 'types/post';
-import { addHeartThunk, createPostThunk, getTrendThunk, removeHeartThunk } from '../../thunk/trendPostThunk';
+import { trendPostExtraReducers, trendPostReducers } from '../../reducer/trendPost';
 
 interface CommonState {
   sex: string;
@@ -24,57 +24,8 @@ const initialState: CommonState = {
 export const trendPostSlice = createSlice({
   name: 'trendPost',
   initialState,
-  reducers: {
-    // TODO: reducer를 따로 빼서 작업하는 것도 고려중
-    changeSexCondition: (state, action) => {
-      setInitPostsAndLast(state);
-      state.sex = action.payload;
-      getTrendThunk({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
-    },
-    changeAgeRangeCondition: (state, action) => {
-      setInitPostsAndLast(state);
-      state.ageRange = action.payload;
-      getTrendThunk({ lastId: state.lastId, sex: state.sex, ageRange: state.ageRange });
-    },
-  },
-  extraReducers: (builder) => {
-    // TODO: extraReducers를 따로 빼서 작업하는 것도 고려중
-    builder
-      .addCase(getTrendThunk.pending, (state, action) => {})
-      .addCase(getTrendThunk.fulfilled, (state, action) => {
-        state.isLast = action.payload.length === 0;
-        state.lastId = action.payload.length !== 0 ? action.payload[action.payload.length - 1].postId : undefined;
-        state.trendPosts = [...state.trendPosts, ...action.payload];
-      })
-      .addCase(addHeartThunk.fulfilled, (state, action) => {
-        state.trendPosts = state.trendPosts.map((post) => {
-          if (post.postId === action.payload.postId) {
-            post.likeCnt += 1;
-            post.isLike = true;
-          }
-          return post;
-        });
-      })
-      .addCase(removeHeartThunk.fulfilled, (state, action) => {
-        state.trendPosts = state.trendPosts.map((post) => {
-          if (post.postId === action.payload.postId) {
-            post.likeCnt -= 1;
-            post.isLike = false;
-          }
-          return post;
-        });
-      })
-      .addCase(createPostThunk.pending, (state, action) => {})
-      .addCase(createPostThunk.fulfilled, (state, action) => {
-        state.trendPosts = [action.payload, ...state.trendPosts];
-      });
-  },
+  reducers: trendPostReducers(),
+  extraReducers: (builder) => trendPostExtraReducers(builder),
 });
-
-const setInitPostsAndLast = (state: Draft<CommonState>) => {
-  state.trendPosts = [];
-  state.lastId = undefined;
-  state.isLast = false;
-};
 
 export const { changeSexCondition, changeAgeRangeCondition } = trendPostSlice.actions;

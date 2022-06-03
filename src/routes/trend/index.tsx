@@ -18,6 +18,7 @@ const Trend = () => {
     if (entry.isIntersecting && !isLoading && !isLast) {
       dispatch(getTrendThunk({ sex, ageRange, lastId }))
         .unwrap()
+        // TODO: 401, 403 에러에 대한 통합 예외 처리 필요!
         .catch((err) => {
           if (err.message.includes('401')) {
             dispatch(initUser(user));
