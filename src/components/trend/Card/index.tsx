@@ -18,9 +18,6 @@ interface Props {
   likeIt: boolean;
 }
 
-const DEFAULT_IMG_URL =
-  'https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?w=72&h=72&c=c';
-
 const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, commentCnt, likeIt }: Props) => {
   const nav = useNavigate();
   const dispatch = useAppDispatch();
@@ -38,7 +35,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
   return (
     <div className={cs.cardWrapper}>
       <div className={cs.cardHeader}>
-        <ProfileCircle url={profileImg ?? DEFAULT_IMG_URL} />
+        <ProfileCircle url={profileImg} />
         <p>{nickname}</p>
       </div>
       <time>{createdAt}</time>

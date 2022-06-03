@@ -10,8 +10,6 @@ const UserInfoInput = () => {
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
 
-  const nav = useNavigate();
-
   // TODO: Change관련 hooks 로 빼서 중복 제거하기
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.currentTarget.value);
@@ -23,11 +21,7 @@ const UserInfoInput = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({ name, password }))
-      .unwrap()
-      .then(() => {
-        nav('/trend');
-      });
+    dispatch(login({ name, password }));
   };
 
   return (
