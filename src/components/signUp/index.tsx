@@ -96,7 +96,11 @@ const SignUp = () => {
           <input value={nickname} type='text' placeholder='닉네임' onChange={onChangeNickname} />
         </label>
       </div>
-      <button disabled={isDuplicate || isInvalidPw} className={cs.signUpBtn} type='submit'>
+      <button
+        disabled={isDuplicate || isInvalidPw || id === '' || password === ''}
+        className={cs.signUpBtn}
+        type='submit'
+      >
         회원가입
       </button>
     </form>

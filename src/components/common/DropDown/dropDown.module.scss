@@ -32,15 +32,15 @@
   .dropDownListOn {
     position: absolute;
     display: block;
-    width: 120px;
+    padding: 12px 6px;
     margin: 4px 0 0;
     background-color: colors.$WHITE;
     border-radius: 4px;
-    box-shadow: -1px -1px 3px colors.$GRAY_01;
 
     > li {
       width: 120px;
       height: 24px;
+      margin: 8px 0;
       font-size: 14px;
       color: colors.$GRAY_012;
       text-align: center;
@@ -50,14 +50,15 @@
         width: inherit;
         padding: 6px;
         border-radius: 4px;
-      }
 
-      &:hover {
-        background-color: colors.$GRAY_00;
+        &:hover {
+          background-color: colors.$THEME;
+          border-radius: 4px;
+        }
       }
 
       .selectedVal {
-        background-color: colors.$GRAY_00;
+        background-color: colors.$THEME;
       }
     }
   }
