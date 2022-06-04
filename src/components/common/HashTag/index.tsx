@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import cs from './hashTag.module.scss';
+import { useAppDispatch } from '../../../redux/store';
+import { getFirstSearchPostThunk } from '../../../redux/thunk/searchPostThunk';
 
 interface Props {
   name: string;
@@ -7,10 +9,12 @@ interface Props {
 
 const HashTag = ({ name }: Props) => {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onHashTagClick = () => {
-    // TODO: 해시태그 값을 통해 검색 결과 페이지로 이동시킨다.
-    nav('..');
+    const tagName = name.slice(1);
+    dispatch(getFirstSearchPostThunk(tagName));
+    nav(`/search?tagName=${tagName}`);
   };
   return (
     <button className={cs.hashTag} type='button' onClick={onHashTagClick}>

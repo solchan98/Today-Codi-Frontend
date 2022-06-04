@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from './redux/store';
 
 import './App.css';
 import Following from './routes/following';
+import SearchPost from './routes/searchPost';
 
 const App = () => {
   const { isLoggedIn } = useAppSelector((state) => state.user);
@@ -33,6 +34,7 @@ const App = () => {
           <Route index element={<Trend />} />
         </Route>
         <Route path='following' element={<Following />} />
+        <Route path='search' element={<SearchPost />} />
         <Route path='post' element={<Board />} />
         <Route path='new-post' element={isLoggedIn ? <NewPost /> : <Navigate to='/login' />} />
       </Route>

@@ -39,3 +39,9 @@ export const getFollowingPostList = async (lastId: number | undefined) => {
   const result = await authApi.get<IPostThumbnailResponse[]>(`/following${postFix}`);
   return result.data;
 };
+
+export const getSearchPostListByTag = async (tagName: string, lastId: number | undefined) => {
+  const postFix = lastId ? `&lastId=${lastId}` : '';
+  const result = await authApi.get<IPostThumbnailResponse[]>(`/search?tagName=${tagName}${postFix}`);
+  return result.data;
+};

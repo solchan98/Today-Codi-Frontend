@@ -5,6 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { userSlice } from './slices/userSlice';
 import { trendPostSlice } from './slices/trendPostSlice';
 import { followingPostSlice } from './slices/followingPostSlice';
+import { searchPostSlice } from './slices/searchPostSlice';
 
 const logger = createLogger();
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   user: userSlice.reducer,
   trendPost: trendPostSlice.reducer,
   followingPost: followingPostSlice.reducer,
+  searchPost: searchPostSlice.reducer,
 });
 
 export const store = configureStore({
