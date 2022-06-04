@@ -1,5 +1,8 @@
 import cx from 'classnames';
 import cs from './board.module.scss';
+import dayjs from 'dayjs';
+import { useMount } from 'react-use';
+import { useRecoilState } from 'recoil';
 
 import HashTag from 'components/common/HashTag';
 import Comment from 'components/board/Comment';
@@ -7,18 +10,16 @@ import MainPoster from 'components/board/MainPoster/inedx';
 import CommentInput from 'components/board/CommentInput';
 import ProfileCircle from 'components/common/ProfileCircle';
 import { useLocation } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { getPost } from '../../services/post';
-import { IPostResponse } from 'types/post';
-import { useMount } from 'react-use';
-import dayjs from 'dayjs';
 import { useAppSelector } from 'redux/store';
+import { postState } from '../../recoil/atoms/post';
 
 const Board = () => {
   const { userId } = useAppSelector((state) => state.user);
   const location = useLocation();
   const postId = useRef(location.search.split('=')[1]);
-  const [post, setPost] = useState<IPostResponse>({} as IPostResponse);
+  const [post, setPost] = useRecoilState(postState);
 
   useMount(() => {
     getPost(Number(postId.current)).then((res) => setPost(res));
