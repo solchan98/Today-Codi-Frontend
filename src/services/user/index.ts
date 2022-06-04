@@ -1,5 +1,13 @@
 import { authApi, basicApi } from '../axios';
 
+export const addFollowing = (userId: number) => {
+  authApi.post(`/auth/follow?userId=${userId}`);
+};
+
+export const removeFollowing = (userId: number) => {
+  authApi.delete(`/auth/follow?userId=${userId}`);
+};
+
 export const loginAPI = (name: string, password: string) => {
   return basicApi
     .post('/auth/login', {

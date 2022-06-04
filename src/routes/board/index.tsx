@@ -1,7 +1,8 @@
 import cx from 'classnames';
-import cs from './board.module.scss';
 import dayjs from 'dayjs';
+import { useRef } from 'react';
 import { useMount } from 'react-use';
+import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import HashTag from 'components/common/HashTag';
@@ -9,11 +10,12 @@ import Comment from 'components/board/Comment';
 import MainPoster from 'components/board/MainPoster/inedx';
 import CommentInput from 'components/board/CommentInput';
 import ProfileCircle from 'components/common/ProfileCircle';
-import { useLocation } from 'react-router-dom';
-import { useRef } from 'react';
-import { getPost } from '../../services/post';
+import { getPost } from 'services/post';
+import { postState } from 'recoil/atoms/post';
 import { useAppSelector } from 'redux/store';
-import { postState } from '../../recoil/atoms/post';
+
+import cs from './board.module.scss';
+import { addFollowing, removeFollowing } from '../../services/user';
 
 const Board = () => {
   const { userId } = useAppSelector((state) => state.user);
@@ -24,6 +26,20 @@ const Board = () => {
   useMount(() => {
     getPost(Number(postId.current)).then((res) => setPost(res));
   });
+
+  const onClickFollow = () => {
+    if (post.isFollowing) {
+      removeFollowing(post.user.userId);
+    } else {
+      addFollowing(post.user.userId);
+    }
+    setPost((prev) => {
+      return {
+        ...prev,
+        isFollowing: !prev.isFollowing,
+      };
+    });
+  };
 
   if (post.postId === undefined) return <div>로딩중</div>;
 
@@ -46,7 +62,11 @@ const Board = () => {
           <ProfileCircle url={post.user.profileImg} />
           <p>{post.user.nickname}</p>
           {post.user.userId !== userId && (
-            <button className={cx(cs.followButton, post.isFollowing && cs.isFollowing)} type='button'>
+            <button
+              className={cx(cs.followButton, post.isFollowing && cs.isFollowing)}
+              type='button'
+              onClick={onClickFollow}
+            >
               {post.isFollowing ? '팔로잉' : '팔로우'}
             </button>
           )}
