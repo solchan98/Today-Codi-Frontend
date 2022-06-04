@@ -1,0 +1,37 @@
+@use '/src/styles/constants/colors';
+
+.authWrapper {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 480px;
+  transform: translate(-50%, -50%);
+
+  .authHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    height: 120px;
+    margin-left: -8px;
+    font-size: 30px;
+    font-weight: bold;
+    color: colors.$BASIC_TEXT;
+    text-align: center;
+
+    > img {
+      width: 80px;
+    }
+  }
+}
+
+.authFooter {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  color: colors.$GRAY_01;
+}

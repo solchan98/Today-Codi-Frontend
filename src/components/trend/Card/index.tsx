@@ -39,7 +39,7 @@ const Card = ({ postId, nickname, profileImg, createdAt, image, likeCnt, comment
         <ProfileCircle url={profileImg} />
         <p>{nickname}</p>
       </div>
-      <time>{dayjs(createdAt).format('YYYY-MM-DD-HH:mm')}</time>
+      <time>{dayjs(createdAt).format('YYYY-MM-DD HH:mm')}</time>
       <button type='button' onClick={onCardClick}>
         <img src={image} alt='img' />
       </button>

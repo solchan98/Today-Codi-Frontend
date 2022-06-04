@@ -5,7 +5,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Trend from 'routes/trend';
 import Board from 'routes/board';
-import Login from 'routes/login';
 import Layout from 'components/layout';
 import NewPost from 'routes/newPost';
 import { getUserInfo } from 'redux/thunk/userThunk';
@@ -14,6 +13,8 @@ import { useAppDispatch, useAppSelector } from './redux/store';
 import './App.css';
 import Following from './routes/following';
 import SearchPost from './routes/searchPost';
+import AuthWrapper from './components/authWrapper';
+import Login from './components/login';
 
 const App = () => {
   const { isLoggedIn } = useAppSelector((state) => state.user);
@@ -29,17 +30,21 @@ const App = () => {
   return (
     <Routes>
       <Route index element={!isLoggedIn ? <div>Index Page!!!</div> : <Navigate to='/trend' />} />
-      <Route element={isLoggedIn ? <Layout /> : <Navigate to='/login' />}>
+      <Route element={isLoggedIn ? <Layout /> : <Navigate to='/auth/login' />}>
         <Route path='trend'>
           <Route index element={<Trend />} />
         </Route>
         <Route path='following' element={<Following />} />
         <Route path='search' element={<SearchPost />} />
         <Route path='post' element={<Board />} />
-        <Route path='new-post' element={isLoggedIn ? <NewPost /> : <Navigate to='/login' />} />
+        <Route path='new-post' element={isLoggedIn ? <NewPost /> : <Navigate to='/auth/login' />} />
       </Route>
-      <Route path='sign-up' element={!isLoggedIn ? <div>SignUp</div> : <Navigate to='/trend' />} />
-      <Route path='login/*' element={!isLoggedIn ? <Login /> : <Navigate to='/trend' />} />
+      <Route path='auth' element={<AuthWrapper />}>
+        <Route path='sign-up' element={!isLoggedIn ? <div>SignUp</div> : <Navigate to='/trend' />} />
+        {/* eslint-disable-next-line react/jsx-no-undef */}
+        <Route path='login' element={!isLoggedIn ? <Login /> : <Navigate to='/trend' />} />
+      </Route>
+      <Route path='*' element={<div>Not Found!</div>} />
     </Routes>
   );
 };
