@@ -1,3 +1,5 @@
+import { useMount } from 'react-use';
+
 import Card from 'components/trend/Card';
 import DropDown from 'components/common/DropDown';
 import { initUser } from 'redux/store/slices/userSlice';
@@ -5,7 +7,7 @@ import { getTrendThunk } from 'redux/thunk/trendPostThunk';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { AGE_WORD_LIST, SEX_WORD_LIST } from 'constant/dropdown';
 import { useAppDispatch, useAppSelector } from 'redux/store';
-import { changeAgeRangeCondition, changeSexCondition } from 'redux/store/slices/trendPostSlice';
+import { changeAgeRangeCondition, changeSexCondition, initTrendPostState } from 'redux/store/slices/trendPostSlice';
 
 import cs from './trend.module.scss';
 
@@ -13,6 +15,10 @@ const Trend = () => {
   const user = useAppSelector((state) => state.user);
   const { sex, ageRange, lastId, isLast, trendPosts, isLoading } = useAppSelector((state) => state.trendPost);
   const dispatch = useAppDispatch();
+
+  useMount(() => {
+    dispatch(initTrendPostState());
+  });
 
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (entry.isIntersecting && !isLoading && !isLast) {

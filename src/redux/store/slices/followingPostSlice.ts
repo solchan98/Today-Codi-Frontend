@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { IPostThumbnailResponse } from 'types/post';
-import { followingPostExtraReducers } from '../../reducer/followingPost';
+import { followingPostExtraReducers, followingPostReducers } from '../../reducer/followingPost';
 
 interface CommonState {
   lastId: number | undefined;
@@ -20,6 +20,8 @@ const initialState: CommonState = {
 export const followingPostSlice = createSlice({
   name: 'followingPostSlice',
   initialState,
-  reducers: {},
+  reducers: followingPostReducers(),
   extraReducers: (builder) => followingPostExtraReducers(builder),
 });
+
+export const { initFollowingPostState } = followingPostSlice.actions;

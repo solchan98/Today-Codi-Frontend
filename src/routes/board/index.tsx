@@ -15,7 +15,7 @@ import { postState } from 'recoil/atoms/post';
 import { useAppSelector } from 'redux/store';
 
 import cs from './board.module.scss';
-import { addFollowing, removeFollowing } from '../../services/user';
+import { addFollowing, removeFollowing } from 'services/user';
 
 const Board = () => {
   const { userId } = useAppSelector((state) => state.user);

@@ -16,8 +16,11 @@ interface CommonState {
 // TODO: thunk 케이스 별로 구분하고싶은데,, 좀 더 고민해볼예정!
 export const trendPostExtraReducers = (builder: ActionReducerMapBuilder<CommonState>) => {
   builder
-    .addCase(getTrendThunk.pending, (state, action) => {})
+    .addCase(getTrendThunk.pending, (state) => {
+      state.isLoading = true;
+    })
     .addCase(getTrendThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.isLast = action.payload.length === 0;
       state.lastId = action.payload.length !== 0 ? action.payload[action.payload.length - 1].postId : undefined;
       state.trendPosts = [...state.trendPosts, ...action.payload];
@@ -40,7 +43,8 @@ export const trendPostExtraReducers = (builder: ActionReducerMapBuilder<CommonSt
         return post;
       });
     })
-    .addCase(createPostThunk.pending, (state, action) => {})
+    // TODO: TrendPost랑 분리할 예정
+    .addCase(createPostThunk.pending, (state) => {})
     .addCase(createPostThunk.fulfilled, (state, action) => {
       action.payload.likeCnt = 0;
       action.payload.commentCnt = 0;
@@ -51,6 +55,9 @@ export const trendPostExtraReducers = (builder: ActionReducerMapBuilder<CommonSt
 
 export const trendPostReducers = () => {
   return {
+    initTrendPostState: (state: WritableDraft<CommonState>) => {
+      setInitPostsAndLast(state);
+    },
     changeSexCondition: (state: WritableDraft<CommonState>, action: { payload: any; type: string }) => {
       setInitPostsAndLast(state);
       state.sex = action.payload;

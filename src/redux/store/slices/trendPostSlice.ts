@@ -28,4 +28,4 @@ export const trendPostSlice = createSlice({
   extraReducers: (builder) => trendPostExtraReducers(builder),
 });
 
-export const { changeSexCondition, changeAgeRangeCondition } = trendPostSlice.actions;
+export const { initTrendPostState, changeSexCondition, changeAgeRangeCondition } = trendPostSlice.actions;

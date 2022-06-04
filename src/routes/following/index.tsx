@@ -1,14 +1,22 @@
-import { useAppDispatch, useAppSelector } from 'redux/store';
-import { initUser } from 'redux/store/slices/userSlice';
-import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import cs from '../trend/trend.module.scss';
+import { useMount } from 'react-use';
+
 import Card from 'components/trend/Card';
+import { initUser } from 'redux/store/slices/userSlice';
+import { useAppDispatch, useAppSelector } from 'redux/store';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { getFollowingPostThunk } from 'redux/thunk/followingPostThunk';
+import { initFollowingPostState } from '../../redux/store/slices/followingPostSlice';
+
+import cs from '../trend/trend.module.scss';
 
 const Following = () => {
   const user = useAppSelector((state) => state.user);
   const { lastId, isLast, followingPosts, isLoading } = useAppSelector((state) => state.followingPost);
   const dispatch = useAppDispatch();
+
+  useMount(() => {
+    dispatch(initFollowingPostState());
+  });
 
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (entry.isIntersecting && !isLoading && !isLast) {

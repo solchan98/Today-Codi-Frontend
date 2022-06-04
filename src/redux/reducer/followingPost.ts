@@ -1,8 +1,9 @@
-import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
+import { ActionReducerMapBuilder, Draft } from '@reduxjs/toolkit';
 
 import { IPostThumbnailResponse } from 'types/post';
 import { addHeartThunk, removeHeartThunk } from '../thunk/trendPostThunk';
 import { getFollowingPostThunk } from '../thunk/followingPostThunk';
+import { WritableDraft } from 'immer/dist/internal';
 
 interface CommonState {
   lastId: number | undefined;
@@ -14,8 +15,11 @@ interface CommonState {
 // TODO: thunk 케이스 별로 구분하고싶은데,, 좀 더 고민해볼예정!
 export const followingPostExtraReducers = (builder: ActionReducerMapBuilder<CommonState>) => {
   builder
-    .addCase(getFollowingPostThunk.pending, (state, action) => {})
+    .addCase(getFollowingPostThunk.pending, (state) => {
+      state.isLoading = true;
+    })
     .addCase(getFollowingPostThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.isLast = action.payload.length === 0;
       state.lastId = action.payload.length !== 0 ? action.payload[action.payload.length - 1].postId : undefined;
       state.followingPosts = [...state.followingPosts, ...action.payload];
@@ -39,4 +43,18 @@ export const followingPostExtraReducers = (builder: ActionReducerMapBuilder<Comm
       });
     });
   return builder;
+};
+
+export const followingPostReducers = () => {
+  return {
+    initFollowingPostState: (state: WritableDraft<CommonState>) => {
+      setInitPostsAndLast(state);
+    },
+  };
+};
+
+const setInitPostsAndLast = (state: Draft<CommonState>) => {
+  state.followingPosts = [];
+  state.lastId = undefined;
+  state.isLast = false;
 };
