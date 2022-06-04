@@ -30,8 +30,10 @@ const SearchBar = () => {
     <div className={cs.searchBarWrapper}>
       <form onSubmit={onSubmit}>
         <input value={value} type='text' placeholder='오늘의 코디 태그검색' onChange={onChangeValue} />
+        <button type='submit'>
+          <SearchIcon className={cs.svg} />
+        </button>
       </form>
-      <SearchIcon className={cs.svg} />
     </div>
   );
 };

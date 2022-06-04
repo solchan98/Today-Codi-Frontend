@@ -38,6 +38,7 @@ const Following = () => {
 
   return (
     <div className={cs.trend}>
+      <h1 className={cs.searchInfoTitle}>{`'#${decodeURI(tagName)}'에 대한 게시글 검색 결과`}</h1>
       <div className={cs.cardWrapper}>
         {searchPosts.map((post) => (
           <Card

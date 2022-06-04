@@ -1,3 +1,4 @@
+@use '/src/styles/constants/colors';
 @use '/src/styles/mixins/responsive';
 
 .trend {
@@ -10,6 +11,13 @@
     > div {
       margin-right: 12px;
     }
+  }
+
+  .searchInfoTitle {
+    margin: 36px 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: colors.$INDEX;
   }
 
   .cardWrapper {
