@@ -1,9 +1,10 @@
-import cs from './loginForm.module.scss';
-import Logo from '../../../assets/pngs/logo.png';
-import { useAppDispatch } from '../../../redux/store';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { login } from '../../../redux/thunk/userThunk';
-import { useNavigate } from 'react-router-dom';
+
+import Logo from 'assets/pngs/logo.png';
+import { login } from 'redux/thunk/userThunk';
+import { useAppDispatch } from 'redux/store';
+
+import cs from './loginForm.module.scss';
 
 const UserInfoInput = () => {
   const [name, setName] = useState('');

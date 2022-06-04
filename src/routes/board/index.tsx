@@ -65,7 +65,7 @@ const Board = () => {
           {post.commentList.map((comment) => (
             <Comment
               key={comment.commentId}
-              nickname={comment.userNickname}
+              nickname={comment.nickname}
               profileImg={comment.profileImg}
               content={comment.content}
             />

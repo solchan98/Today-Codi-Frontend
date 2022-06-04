@@ -29,9 +29,9 @@ export interface IPostResponse {
   likeIt: boolean;
 }
 
-interface IComment {
+export interface IComment {
   commentId: number;
-  userNickname: string;
+  nickname: string;
   profileImg: string;
   content: string;
   createdAt: Date;

@@ -1,6 +1,13 @@
 import { authApi } from '../axios';
 import { IPostThumbnailResponse } from 'types/post';
 
+export const newComment = async (postId: number, content: string) => {
+  const res = await authApi.post(`/post/comment?postId=${postId}`, {
+    content,
+  });
+  return res.data;
+};
+
 export const getPost = async (postId: number) => {
   const res = await authApi.get(`/post?postId=${postId}`);
   return res.data;
