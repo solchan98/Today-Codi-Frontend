@@ -19,17 +19,17 @@
 
     @include responsive.after('ML') {
       grid-template-columns: repeat(2, 1fr);
-      width: 480px;
+      width: 500px;
     }
 
     @include responsive.after('MD') {
       grid-template-columns: repeat(3, 1fr);
-      width: 720px;
+      width: 750px;
     }
 
     @include responsive.after('LD') {
       grid-template-columns: repeat(4, 1fr);
-      width: 960px;
+      width: 1000px;
     }
   }
 }
