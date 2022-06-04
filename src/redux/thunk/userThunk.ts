@@ -2,12 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getUserInfoAPI, loginAPI } from '../../services/user';
 
 interface ILoginRequest {
-  name: string;
+  stringId: string;
   password: string;
 }
 
-export const login = createAsyncThunk('POST/LOGIN', ({ name, password }: ILoginRequest) => {
-  return loginAPI(name, password)
+export const login = createAsyncThunk('POST/LOGIN', ({ stringId, password }: ILoginRequest) => {
+  return loginAPI(stringId, password)
     .then((res) => res)
     .catch((err) => {
       throw Error(err);

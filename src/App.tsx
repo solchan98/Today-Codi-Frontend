@@ -15,6 +15,7 @@ import Following from './routes/following';
 import SearchPost from './routes/searchPost';
 import AuthWrapper from './components/authWrapper';
 import Login from './components/login';
+import SignUp from './components/signUp';
 
 const App = () => {
   const { isLoggedIn } = useAppSelector((state) => state.user);
@@ -40,8 +41,7 @@ const App = () => {
         <Route path='new-post' element={isLoggedIn ? <NewPost /> : <Navigate to='/auth/login' />} />
       </Route>
       <Route path='auth' element={<AuthWrapper />}>
-        <Route path='sign-up' element={!isLoggedIn ? <div>SignUp</div> : <Navigate to='/trend' />} />
-        {/* eslint-disable-next-line react/jsx-no-undef */}
+        <Route path='sign-up' element={!isLoggedIn ? <SignUp /> : <Navigate to='/trend' />} />
         <Route path='login' element={!isLoggedIn ? <Login /> : <Navigate to='/trend' />} />
       </Route>
       <Route path='*' element={<div>Not Found!</div>} />

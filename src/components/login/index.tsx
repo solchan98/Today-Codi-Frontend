@@ -7,7 +7,7 @@ import cs from './login.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [name, setName] = useState('');
+  const [stringId, setStringId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ const Login = () => {
 
   // TODO: Change관련 hooks 로 빼서 중복 제거하기
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
+    setStringId(e.currentTarget.value);
   };
 
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const Login = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     setErrorMessage('');
     e.preventDefault();
-    dispatch(login({ name, password }))
+    dispatch(login({ stringId, password }))
       .unwrap()
       .catch((err) => {
         const errMessage = err.message.split('Error: ')[1];
@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <form className={cs.loginForm} onSubmit={onSubmit}>
-      <input type='text' value={name} placeholder='아이디' onChange={onNameChange} />
+      <input type='text' value={stringId} placeholder='아이디' onChange={onNameChange} />
       <input type='password' value={password} placeholder='비밀번호' onChange={onPasswordChange} />
       {errorMessage !== '' && <span>{errorMessage}</span>}
       <button className={cs.loginBtn} type='submit'>

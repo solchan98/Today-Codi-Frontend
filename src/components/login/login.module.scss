@@ -12,11 +12,11 @@
     padding: 12px 8px;
     margin-top: -1px;
     font-size: 16px;
-    border: 2px solid colors.$BORDER_LINE;
+    border: 1px solid colors.$BORDER_LINE;
     border-radius: 4px;
 
     &:focus {
-      border: 2px solid colors.$THEME;
+      border: 1px solid colors.$THEME;
     }
   }
 
