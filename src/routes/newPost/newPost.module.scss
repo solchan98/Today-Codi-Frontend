@@ -20,6 +20,10 @@
           font-size: 12px;
           cursor: default;
         }
+
+        > button label {
+          cursor: pointer;
+        }
       }
 
       .dropDownWrapper {

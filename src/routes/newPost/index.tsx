@@ -42,7 +42,7 @@ const NewPost = () => {
       .then((res) => {
         setTimeout(() => {
           // 구글 스토리지에 이미지가 늦게 올라가서 한 설정인데 이거 좀 아닌데;;
-          nav(`/trend/post?postId=${res.postId}`);
+          nav(`/post?postId=${res.postId}`);
         }, 1000);
       });
   };
