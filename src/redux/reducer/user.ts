@@ -37,7 +37,7 @@ export const userExtraReducers = (builder: ActionReducerMapBuilder<CommonState>)
 
 export const userReducers = () => {
   return {
-    initUser: (state: WritableDraft<CommonState>, action: { payload: any; type: string }) => {
+    initUser: (state: WritableDraft<CommonState>) => {
       setInitUserInfo(state);
       authApi.defaults.headers.common.authorization = '';
       store.remove('accessToken');

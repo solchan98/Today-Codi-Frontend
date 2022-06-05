@@ -7,7 +7,6 @@ import { getSearchPostThunk } from '../../redux/thunk/searchPostThunk';
 import { useLocation } from 'react-router-dom';
 
 const Following = () => {
-  const user = useAppSelector((state) => state.user);
   const { lastId, isLast, searchPosts, isLoading } = useAppSelector((state) => state.searchPost);
   const dispatch = useAppDispatch();
 
@@ -21,7 +20,7 @@ const Following = () => {
         // TODO: 401, 403 에러에 대한 통합 예외 처리 필요!
         .catch((err) => {
           if (err.message.includes('401')) {
-            dispatch(initUser(user));
+            dispatch(initUser());
           }
         });
       observer.unobserve(entry.target);

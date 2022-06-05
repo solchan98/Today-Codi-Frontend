@@ -12,7 +12,6 @@ import { changeAgeRangeCondition, changeSexCondition, initTrendPostState } from 
 import cs from './trend.module.scss';
 
 const Trend = () => {
-  const user = useAppSelector((state) => state.user);
   const { sex, ageRange, lastId, isLast, trendPosts, isLoading } = useAppSelector((state) => state.trendPost);
   const dispatch = useAppDispatch();
 
@@ -27,7 +26,7 @@ const Trend = () => {
         // TODO: 401, 403 에러에 대한 통합 예외 처리 필요!
         .catch((err) => {
           if (err.message.includes('401')) {
-            dispatch(initUser(user));
+            dispatch(initUser());
           }
         });
       observer.unobserve(entry.target);
