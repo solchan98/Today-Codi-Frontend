@@ -20,6 +20,11 @@
 - React-Router-Dom
 - Redux Toolkit / Recoil
 
+### 배포 환경
+- Debian GNU/Linux 11
+- Ubuntu 18.04 LTS
+- ssl 인증을 통한 https 지원 / (SertBot)
+
 ## 구현 기능
 구현 기능은 간단 명료하게 작성
 ### 로그인
