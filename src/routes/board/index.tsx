@@ -2,7 +2,7 @@ import cx from 'classnames';
 import dayjs from 'dayjs';
 import { useRef } from 'react';
 import { useMount } from 'react-use';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import HashTag from 'components/common/HashTag';
@@ -22,9 +22,12 @@ const Board = () => {
   const location = useLocation();
   const postId = useRef(location.search.split('=')[1]);
   const [post, setPost] = useRecoilState(postState);
+  const nav = useNavigate();
 
   useMount(() => {
-    getPost(Number(postId.current)).then((res) => setPost(res));
+    getPost(Number(postId.current))
+      .then((res) => setPost(res))
+      .catch(() => nav('/trend'));
   });
 
   const onClickFollow = () => {
