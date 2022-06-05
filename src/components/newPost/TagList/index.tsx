@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react';
+import { ChangeEventHandler, KeyboardEvent, MouseEventHandler } from 'react';
 
 import cs from './tagList.module.scss';
 
@@ -10,6 +10,10 @@ interface Props {
 }
 
 const TagList = ({ tagList, tagInput, onTagClick, onChangeTagInput }: Props) => {
+  const checkKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
+
   return (
     <ul className={cs.tagList}>
       {tagList.map((tag) => (
@@ -17,7 +21,7 @@ const TagList = ({ tagList, tagInput, onTagClick, onChangeTagInput }: Props) => 
           {tag}
         </button>
       ))}
-      <input value={tagInput} placeholder='#코디' onChange={onChangeTagInput} />
+      <input value={tagInput} placeholder='#코디' onChange={onChangeTagInput} onKeyDown={checkKeyDown} />
     </ul>
   );
 };
