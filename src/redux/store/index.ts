@@ -1,4 +1,3 @@
-import { createLogger } from 'redux-logger';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -7,7 +6,7 @@ import { trendPostSlice } from './slices/trendPostSlice';
 import { followingPostSlice } from './slices/followingPostSlice';
 import { searchPostSlice } from './slices/searchPostSlice';
 
-const logger = createLogger();
+// const logger = createLogger();
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
@@ -18,7 +17,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   enhancers: (defaultEnhancers) => [...defaultEnhancers],
 });
 
