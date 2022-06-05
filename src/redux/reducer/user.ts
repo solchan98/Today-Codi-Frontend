@@ -13,29 +13,23 @@ interface CommonState {
 
 export const userExtraReducers = (builder: ActionReducerMapBuilder<CommonState>) => {
   builder
-    .addCase(login.pending, (state, action) => {
-      console.log('pending');
-    })
+    .addCase(login.pending, (state, action) => {})
     .addCase(login.fulfilled, (state, action) => {
-      console.log('fulfilled');
       const { userId, nickname, profileImg, accessToken } = action.payload;
       setUserInfoByLogin(state, userId, nickname, profileImg);
       store.set('accessToken', accessToken);
       authApi.defaults.headers.common.Authorization = `Bearer ${action.payload.accessToken}`;
     })
     .addCase(login.rejected, (state, action) => {
-      console.log('rejected');
       console.log(action.error); // TODO: 로그인 실패 시, 실패 이유 Popup 만들기
     })
     .addCase(getUserInfo.fulfilled, (state, action) => {
-      console.log('fulfilled');
       const { userId, nickname, profileImg, accessToken } = action.payload;
       setUserInfoByLogin(state, userId, nickname, profileImg);
       store.set('accessToken', accessToken); // TODO: 토큰 접근 키 상수화 및 어떤 스토리지 사용할지 고민
       authApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     })
     .addCase(getUserInfo.rejected, (state, action) => {
-      console.log('rejected');
       setInitUserInfo(state);
       console.log(action.error); // TODO: 로그인 실패 시, 실패 이유 Popup 만들기
     });
